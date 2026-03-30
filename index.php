@@ -1,3 +1,14 @@
+<?php
+if(isset($_COOKIE["CarCookie"])){
+    $carData = json_decode($_COOKIE["CarCookie"],true);
+
+    $brand = $carData["brand"] ?? null;
+    $modeltype = $carData["modeltype"] ?? null;
+    $color = $carData["color"] ?? null;
+    $enginetype = $carData["enginetype"] ?? null;
+    $wheeltype = $carData["wheeltype"] ?? null;
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,16 +21,16 @@
 </head>
 <body>
 <div id="form_div">
-    <form action="./backend/restricted/webDev/orders/server.php" method="post">
+    <form action="./server.php" method="post">
         <label>Select Brand:</label>
         <div id="brand_selection_div">
         <select name="brand">
-            <option value="volvo">VOLVO</option>
-            <option value="seat">SEAT</option>
-            <option value="bmw">BMW</option>
-            <option value="skoda">SKODA</option>
-            <option value="mercedes">MERCEDES</option>
-            <option value="porsche">PORSCHE</option>
+            <option value="volvo" <?= $brand ==="volvo" ? "selected" : ""?>>VOLVO</option>
+            <option value="seat" <?= $brand ==="seat" ? "selected" : ""?>>SEAT</option>
+            <option value="bmw" <?= $brand ==="bmw" ? "selected" : ""?>>BMW</option>
+            <option value="skoda" <?= $brand ==="skoda" ? "selected" : ""?>>SKODA</option>
+            <option value="mercedes" <?= $brand ==="mercedes" ? "selected" : ""?>>MERCEDES</option>
+            <option value="porsche" <?= $brand ==="porsche" ? "selected" : ""?>>PORSCHE</option>
         </select>
         </div>
         <label>Select Model:</label>

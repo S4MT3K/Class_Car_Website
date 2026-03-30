@@ -1,6 +1,4 @@
 <?php
-
-
 interface MotorInterface {
     public function getHubraum(): string;
     public function getTyp(): string;

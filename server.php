@@ -1,6 +1,6 @@
 <?php
 function myAutoloader($className){
-    $classFile='../../../../'.$className.'.php';
+    $classFile='./'.$className.'.php';
 
     if(file_exists($classFile)){
         include($classFile);
@@ -15,11 +15,23 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
     $enginetype = $_POST["enginetype"];
     $wheeltype = $_POST["wheeltype"];
 
+    $carData = [
+            "brand" => $brand,
+            "modeltype" => $modeltype,
+            "color" => $color,
+            "engineType" => $enginetype,
+            "wheelType" => $wheeltype
+    ];
+
+
+
 
     $engine = new Engine($enginetype);
     $orderedCar = new Car($brand, $modeltype, $color, $engine, $wheeltype);
     $hubraum = $orderedCar->getEngine()->getHubraum() ?? "200KW"; //Null Coalacing
     $tableRowLabel = $hubraum == "200KW" ? "Kapazität" : "Hubraum";
+    setcookie("CarCookie", json_encode($carData), time() + 3600);
+
     echo "<h1>IHRE BESTELLUNG</h1>";
     echo "<br>";
     echo "<table border='1'>
@@ -42,4 +54,4 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
 </table>";
 }
 ?>
-<link rel="stylesheet" href="../../../../style.css">
+<link rel="stylesheet" href="./style.css">

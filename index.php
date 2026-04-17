@@ -8,6 +8,13 @@ if(isset($_COOKIE["CarCookie"])){
     $enginetype = $carData["enginetype"] ?? null;
     $wheeltype = $carData["wheeltype"] ?? null;
 }
+else{
+    $brand = null;
+    $modeltype = null;
+    $color = null;
+    $enginetype = null;
+    $wheeltype = null;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,34 +43,34 @@ if(isset($_COOKIE["CarCookie"])){
         <label>Select Model:</label>
         <div id="model_selection_div">
             <select name="modeltype">
-                <option value="coupe">Coupè</option>
-                <option value="limousine">Limousine</option>
-                <option value="kombi">Kombi</option>
+                <option value="coupe" <?= $modeltype ==="coupe" ? "selected" : ""?>>Coupè</option>
+                <option value="limousine" <?= $modeltype ==="limousine" ? "selected" : ""?>>Limousine</option>
+                <option value="kombi" <?= $modeltype ==="kombi" ? "selected" : ""?>>Kombi</option>
             </select>
         </div>
         <label>Select Color:</label>
         <div id="color_selection_div">
             <select name="color">
-                <option value="red">RED</option>
-                <option value="green">GREEN</option>
-                <option value="blue">BLUE</option>
-                <option value="white">WHITE</option>
-                <option value="black">BLACK</option>
+                <option value="red" <?= $color ==="red" ? "selected" : ""?>>RED</option>
+                <option value="green" <?= $color ==="green" ? "selected" : ""?>>GREEN</option>
+                <option value="blue" <?= $color ==="blue" ? "selected" : ""?>>BLUE</option>
+                <option value="white" <?= $color ==="white" ? "selected" : ""?>>WHITE</option>
+                <option value="black" <?= $color ==="black" ? "selected" : ""?>>BLACK</option>
             </select>
         </div>
         <label>Select Enginetype:</label>
         <div id="engine_selection_div">
             <select name="enginetype">
-                <option value="diesel">DIESEL</option>
-                <option value="benzin">BENZIN</option>
-                <option value="elektro">ELEKTRO</option>
+                <option value="diesel" <?= $enginetype ==="diesel" ? "selected" : ""?>>DIESEL</option>
+                <option value="benzin" <?= $enginetype ==="benzin" ? "selected" : ""?>>BENZIN</option>
+                <option value="elektro" <?= $enginetype ==="elektro" ? "selected" : ""?>>ELEKTRO</option>
             </select>
         </div>
         <label>Select Wheeltype:</label>
         <div id="wheel_selection_div">
             <select name="wheeltype">
-                <option value="aluminium">ALUMINIUM</option>
-                <option value="steel">STEEL</option>
+                <option value="aluminium" <?= $wheeltype ==="aluminium" ? "selected" : ""?>>ALUMINIUM</option>
+                <option value="steel" <?= $wheeltype ==="steel" ? "selected" : ""?>>STEEL</option>
             </select>
         </div>
         <button type="submit" name="BESTELLEN">BESTELLEN</button>

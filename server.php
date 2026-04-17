@@ -19,8 +19,8 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
             "brand" => $brand,
             "modeltype" => $modeltype,
             "color" => $color,
-            "engineType" => $enginetype,
-            "wheelType" => $wheeltype
+            "enginetype" => $enginetype,
+            "wheeltype" => $wheeltype
     ];
 
 
@@ -52,6 +52,7 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
         <th>$wheeltype</th>
     </tr>
 </table>";
+    DBConn::checkConnection("10.101.110.178","VEHICLE","admin","q1w2e3r4t5");
 }
 ?>
 <link rel="stylesheet" href="./style.css">

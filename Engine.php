@@ -26,6 +26,11 @@ class Engine implements IEngine
         $this->status = false;
     }
 
+    public function getType() : string
+    {
+        return $this->type;
+    }
+
     public function getHubraum() : float|null
     {
         return $this?->hubraum;

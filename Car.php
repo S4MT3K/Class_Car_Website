@@ -6,8 +6,6 @@ class Car {
     private Engine $engine;
     private string $wheelType;
 
-    private Window $window;
-
     public function __construct(string $brand, string $modelType, string $color, Engine $engine, string $wheelType){
         $this->brand = $brand;
         $this->modelType = $modelType;

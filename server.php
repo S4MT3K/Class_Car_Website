@@ -32,6 +32,16 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
     $tableRowLabel = $hubraum == "200KW" ? "Kapazität" : "Hubraum";
     setcookie("CarCookie", json_encode($carData), time() + 3600);
 
+    try{
+        $conn = DBConn::getDBConn();
+        $sqlquery = "INSERT INTO Car (CarID, CarBrand, CarColor, CarModel, EngineID, CarWheelType) VALUES (1, {$orderedCar->getBrand()}, {$orderedCar->getColor()}, {$carData["modeltype"]}, 1, $wheeltype)";
+        $stmt = $conn->prepare($sqlquery);
+        $stmt->execute();
+    }
+    catch(Exception $e){
+        echo $e->getMessage();
+    }
+
     echo "<h1>IHRE BESTELLUNG</h1>";
     echo "<br>";
     echo "<table border='1'>
@@ -52,7 +62,6 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
         <th>$wheeltype</th>
     </tr>
 </table>";
-    DBConn::checkConnection("10.101.110.178","VEHICLE","admin","q1w2e3r4t5");
 }
 ?>
 <link rel="stylesheet" href="./style.css">

@@ -1,53 +1,36 @@
 <?php
-class UserService
-{
-    public function getUserById($id)
+#Polymorphismus
+abstract class A{
+    public CONST WORT = "WORT";
+    public function sayHy()
     {
-        if ($id == null) {
-            throw new Exception("ID darf nicht leer sein");
-        }
-
-        $users = [
-                1 => "Max",
-                2 => "Anna"
-        ];
-
-        return $users[$id];
+        $a = 44;
+        echo "$a";
+        echo "<br>";
+        echo "Hello world";
     }
 }
 
-
-
-
-
-class UserService
+class English extends A
 {
-    public function getUserById($id)
+ #keine änderung der sayHy Methode
+}
+
+class Deutsch extends A
+{
+    public function sayHy()
     {
-        if ($id == null) {
-            throw new Exception("ID darf nicht leer sein");
-        }
-
-        $users = [
-                1 => "Max",
-                2 => "Anna"
-        ];
-
-        return $users[$id];
+        echo "Haaallöööööchen";
     }
 }
 
-function divide($a, $b)
-{
-    // ❌ Division durch 0 möglich
-    return $a / $b;
-}
+$english = new English();
+$deutsch = new Deutsch();
 
-// ❌ kein try-catch
-$userService = new UserService();
 
-echo "User: " . $userService->getUserById($_GET['id']);
-echo "<br>";
+#$english->sayHy();
 
-$result = divide(10, $_GET['divider']);
-echo "Result: " . $result;
+$deutsch->sayHy();
+
+echo A::WORT;
+

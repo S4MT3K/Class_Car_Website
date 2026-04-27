@@ -15,7 +15,7 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
     $enginetype = $_POST["enginetype"];
     $wheeltype = $_POST["wheeltype"];
 
-    $carData = [
+    $carData = [ #für json encode für den cookie
             "brand" => $brand,
             "modeltype" => $modeltype,
             "color" => $color,
@@ -24,27 +24,18 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
     ];
 
 
+    //$orderedCar = new Car($brand, $modeltype, $color, $engine, $wheeltype); //TODO: überprüfe ob notwendig
 
-
-    $engine = new Engine($enginetype);
-    $orderedCar = new Car($brand, $modeltype, $color, $engine, $wheeltype);
-    $hubraum = $orderedCar->getEngine()->getHubraum() ?? "200KW"; //Null Coalacing
-    $tableRowLabel = $hubraum == "200KW" ? "Kapazität" : "Hubraum";
     setcookie("CarCookie", json_encode($carData), time() + 3600);
 
-    try{
-        $conn = DBConn::getDBConn();
-        $sqlquery = "INSERT INTO Car (CarID, CarBrand, CarColor, CarModel, EngineID, CarWheelType) VALUES (1, {$orderedCar->getBrand()}, {$orderedCar->getColor()}, {$carData["modeltype"]}, 1, $wheeltype)";
-        $stmt = $conn->prepare($sqlquery);
-        $stmt->execute();
-    }
-    catch(Exception $e){
-        echo $e->getMessage();
-    }
-
-    echo "<h1>IHRE BESTELLUNG</h1>";
-    echo "<br>";
-    echo "<table border='1'>
+    try {
+        $engine = 1;
+        $orderedCar = DBConn::createCar($brand, $color, $modeltype, 1, $wheeltype); //TODO: Write in DBConn Class
+        $hubraum = $orderedCar->getEngine() ?? "200KW"; //Null Coalacing
+        $tableRowLabel = $hubraum == "200KW" ? "Kapazität" : "Hubraum";
+        echo "<h1>IHRE BESTELLUNG</h1>";
+        echo "<br>";
+        echo "<table border='1'>
     <tr>
         <th>Marke</th>
         <th>Modell</th>
@@ -54,14 +45,20 @@ if(isset($_POST["BESTELLEN"])){ //Rückversicherung dass das bestellformular abg
         <th>Felgenmaterial</th>
     </tr>
     <tr>
-        <th>$brand</th>
-        <th>$modeltype</th>
-        <th>$color</th>
-        <th>$hubraum</th>
-        <th>$enginetype</th>
-        <th>$wheeltype</th>
+        <th>{$orderedCar->getBrand()}</th>
+        <th>{$orderedCar->getModel()}</th>
+        <th>{$orderedCar->getColor()}</th>
+        <th>{$orderedCar->getEngine()}</th>
+        <th>{$orderedCar->getEngine()}</th>
+        <th>{$orderedCar->getWheelType()}</th>
     </tr>
 </table>";
+    }
+    catch (exception $e){
+        echo $e->getMessage();
+    }
+
+
 }
 ?>
 <link rel="stylesheet" href="./style.css">

@@ -29,6 +29,10 @@ else{
 <body>
 <div id="form_div">
     <form action="./server.php" method="post">
+        <div>
+            <label>Name</label>
+            <input type="text">
+        </div>
         <label>Select Brand:</label>
         <div id="brand_selection_div">
         <select name="brand">
